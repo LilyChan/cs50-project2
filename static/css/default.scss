@@ -1,0 +1,126 @@
+$site-color: darkslategray;
+$site-font-color:  rgb(245, 240, 240);
+$site-header-height: 86px;
+$site-footer-height: 94px;
+$site-menu-height: 52px;
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    .form-control{
+        &:focus{
+            border-color: $site-color;
+            box-shadow: none;
+        }
+    }
+    button, .btn{
+        &:focus{
+            box-shadow: none;
+        }
+    }
+}
+
+header{
+    background-color: $site-color;
+    color: $site-font-color;
+    padding: 15px 30px;
+    .navbar{
+        width: -webkit-fill-available;
+    }
+    a, .navbar .nav-item{
+        color: $site-font-color;
+        &:hover{
+            color: white;
+            font-weight: 500;
+        }
+    }
+}
+
+.site-body{
+    margin-top: $site-header-height;
+    padding: .5rem 1rem;
+}
+
+section{
+    margin: 15px 0;
+}
+
+.button-primary{
+    background-color: $site-color;
+    color: $site-font-color;
+    &:hover{
+        background-color: lighten($color: $site-color, $amount: 40%);
+    }
+}
+
+#channelContent{
+    position: relative;
+    overflow: auto;
+    height: calc(100vh - #{$site-header-height} - #{$site-footer-height} - #{$site-menu-height});
+}
+
+#messageinputArea{
+    background-color: white;
+}
+
+#newMessage{
+    resize:none; 
+}
+
+.popover{
+    position: relative;
+    margin: 1rem;
+    background-color: lighten($color: $site-color, $amount: 70%);
+    z-index: 1;
+    min-width: 190px;
+    span{
+        font-size: smaller;
+        position: absolute;
+        bottom: -1.2rem;
+        white-space: nowrap;
+        overflow: visible;
+    }
+    button{
+        position: absolute;
+        left: -2.5rem;
+        bottom: 0;
+        &:hover{
+            color: red;
+        }
+    }
+}
+.popover.float-right span{
+    right:0;
+}
+
+.popover--msgauthor{
+    background-color: lighten($color: $site-color, $amount: 0%);
+    .popover-body{
+        color: $site-font-color;
+    }
+}
+
+.clearfix:after {
+    clear:both;
+    content:".";
+    display:block;
+    height:0;
+    line-height:0;
+    visibility:hidden;
+}
+
+@media (min-width: 576px) {
+    #channelContent{
+        height: calc(100vh - #{$site-header-height} - #{$site-footer-height});
+    }
+    #channelListCtrlbtn {
+        display: none;
+    }
+    .collapse{
+        display: block !important;
+    }
+}

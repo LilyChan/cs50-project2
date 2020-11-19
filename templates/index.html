@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Project 2
+{% endblock %}
+
+{% block header %}
+<nav class="navbar navbar-expand-lg navbar-dark">
+     <!--Header to display name -->
+    <a class="navbar-brand" href={{ url_for('index') }}>Hello, <span class="" id='displayname'></span></a>
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" id="showNewChannelModal" href='#' data-toggle="modal" data-target="#promptInput_channel">Create Channel</a>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+    <!--prompt modal for username-->
+    <div class="modal fade" data-backdrop='static' id="promptInput" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Please type your display name</h5>
+            </div>
+            <div class="modal-body">
+                <form class="form-signin" id="loginwithusername">
+                    <div class="alert alert-danger" role="alert" id="alertMsg_username" style="display: none;"> 
+                    </div>
+                    <label for="username" class="sr-only"></label>
+                    <input class="form-control mb-3" type='text' name='username' id="username" placeholder="Username" required autofocus>
+                    <button class="btn btn-lg btn-block button-primary" type='submit'>submit</button>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+    <button type="button" id="showModal" class="btn btn-lg btn-primary d-none" data-toggle="modal" data-target="#promptInput">Show Modal</button>
+
+    <!--prompt modal for new channel name-->
+    <div class="modal fade" id="promptInput_channel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Please type a new channel name</h5>
+            </div>
+            <div class="modal-body">
+                <form class="" id="createNewChannel">
+                    <div class="alert alert-danger" role="alert" id="alertMsg_channel" style="display: none;"> 
+                    </div>
+                    <label for="newChannel" class="sr-only"></label>
+                    <input class="form-control mb-3" type='text' name='newChannel' id="newChannelName" placeholder="Channel Name" required autofocus>
+                    <button class="btn btn-lg btn-block button-primary" type='submit'>create</button>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+   
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-3">
+                <!--Channel List -->
+                <h5 class="ml-3">
+                    <span id="currentChannel"></span>
+                    <button id='channelListCtrlbtn' class="btn ml-3" type="button" data-toggle="collapse" data-target="#channelList" aria-controls="channelList" aria-expanded="false" aria-label="Toggle navigation">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30" height="30" focusable="false">
+                            <title>Menu</title><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"></path>
+                        </svg>
+                    </button>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#channelList" aria-controls="channelList" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                </h5>
+                <div class="list-group collapse navbar-collapse mb-3" id="channelList">
+                    {% for name in channels %}
+                        <a href="#" class="list-group-item list-group-item-action js-selectChannel" data-name="{{ name }}">{{ name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-9">
+                <!--Channel Chat History -->
+                <div id="channelContent"></div>
+
+                <!--Input Area to type message -->
+                <div class="fixed-bottom col-xs-12 col-sm-8 offset-sm-4 col-md-9 offset-md-3 pt-3" id="messageinputArea">
+                    <form class="" id="inputMessage">
+                        <label for="newMessage" class="sr-only"></label>
+                        <textarea row='5' class="form-control mb-3" type='text' name='newMessage' id="newMessage" placeholder="Type your message here" required autofocus></textarea>
+                        <button class="btn btn-md btn-block button-primary" id="submitMessage" type='submit' hidden>submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
